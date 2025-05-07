@@ -1,12 +1,17 @@
 name: Build APK
-on: [push]
+on: [push]  # Se ejecuta al hacer push
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest  # Corrige "runn-on" -> "runs-on"
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
+      - uses: actions/checkout@v4  # Corrige "action:/checkout@4"
+      - uses: actions/setup-python@v4  # Corrige "action:/setup-python@4"
         with:
           python-version: '3.9'
-      - run: pip install buildozer cython==0.29.33
-      - run: buildozer -v android debug
+      - run: pip install buildozer cython==0.29.33  # Corrige "builduser cythom=0.2b.33"
+      - run: buildozer -v android debug  # Corrige "builduser"
+      - name: Upload APK  # Añade este paso para obtener el APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-release
+          path: bin/*.apk
